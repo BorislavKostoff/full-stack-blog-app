@@ -1,9 +1,27 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 const Home = () => {
 
-  const posts = [
+  const [posts, setPosts] = useState([])
+
+  const cat = useLocation().search
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/posts${cat}`)
+        setPosts(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData()
+  }, [cat])
+
+  /* const posts = [
     {
       id: 1,
       title: 'Minim eiusmod exercitation eu cupidatat Lorem nostrud et.',
@@ -34,7 +52,7 @@ const Home = () => {
       desc: 'Elit elit ut cillum aute id fugiat commodo aute qui minim id Lorem. Fugiat mollit incididunt consequat sint officia officia proident incididunt consequat. Cupidatat dolore ad anim consectetur occaecat deserunt magna adipisicing laboris incididunt ipsum consectetur id voluptate.',
       img: 'https://images.pexels.com/photos/10391653/pexels-photo-10391653.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'
     },
-  ]
+  ] */
 
   return (
     <div className='home'>

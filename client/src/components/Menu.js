@@ -1,8 +1,24 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
-const Menu = () => {
+const Menu = ({ cat }) => {
 
-    const posts = [
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/posts/?cat=${cat}`)
+        setPosts(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData()
+  }, [cat])
+
+    /* const posts = [
         {
           id: 1,
           title: 'Minim eiusmod exercitation eu cupidatat Lorem nostrud et.',
@@ -33,7 +49,7 @@ const Menu = () => {
           desc: 'Elit elit ut cillum aute id fugiat commodo aute qui minim id Lorem. Fugiat mollit incididunt consequat sint officia officia proident incididunt consequat. Cupidatat dolore ad anim consectetur occaecat deserunt magna adipisicing laboris incididunt ipsum consectetur id voluptate.',
           img: 'https://images.pexels.com/photos/10391653/pexels-photo-10391653.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'
         },
-      ]
+      ] */
 
   return (
     <div className='menu'>
