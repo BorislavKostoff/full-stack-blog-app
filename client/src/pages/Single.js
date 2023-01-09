@@ -43,7 +43,7 @@ const Single = () => {
   return (
     <div className='single'>
       <div className='content'>
-        <img src={post?.img} alt='' />
+        <img src={`../upload/${post?.img}`} alt='' />
         <div className='user'>
           {post.userImg && <img src={post.userImg} alt='' />}
           <div className='info'>
@@ -51,7 +51,7 @@ const Single = () => {
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
           {currentUser.username === post.username && (<div className='edit'>
-            <Link to={`/write?edit=2`}><FaEdit className='editIcon'/></Link>
+            <Link to={`/write?edit=${post.id}`} state={post}><FaEdit className='editIcon'/></Link>
             <FaTrashAlt onClick={handleDelete} className='deleteIcon'/>
           </div>)}
         </div>
